@@ -1,28 +1,34 @@
 document.addEventListener("DOMContentLoaded", function () {
-    //nested menu
-    const nestedMenu = document.querySelector(".nested-menu")
-    const menuTriggerEl = document.querySelector(".menu-trigger-el");
+  //nested menu
+  const nestedMenu = document.querySelector(".nested-menu");
+  const menuTriggerEl = document.querySelector(".menu-trigger-el");
 
-    menuTriggerEl.addEventListener("mouseover", function () {
-        nestedMenu.style.display = "block";
-});
-nestedMenu.addEventListener("mouseout", function () {
-  this.style.display = "none";
-});
-    
-    // read more less
+  menuTriggerEl.addEventListener("mouseover", function () {
+    nestedMenu.style.display = "block";
+  });
+  nestedMenu.addEventListener("mouseout", function () {
+    this.style.display = "none";
+  });
 
-    const readMoreLessBtn = document.querySelector(".read-more-less-btn");
-    const additionalText = document.querySelector(".additional-paragraph")
-    console.log(additionalText);
+  // read more less
 
-    readMoreLessBtn.addEventListener("click", function() {
-        if (additionalText.style.display === "none" || additionalText.style.display === "") {
-            additionalText.style.display = "block";
-            readMoreLessBtn.textContent = "Czytaj mniej";
-        } else {
-            additionalText.style.display = "none";
-            readMoreLessBtn.textContent = "Czytaj więcej";
-        }
-    })
+  const readMoreLessBtns = document.querySelectorAll(".read-more-less-btn");
+
+  function showHideText() {
+    const siblingText = this.previousElementSibling;
+
+    if (
+      siblingText.style.display === "none" ||
+      siblingText.style.display === ""
+    ) {
+      siblingText.style.display = "block";
+      this.textContent = "Czytaj mniej";
+    } else {
+      siblingText.style.display = "none";
+      this.textContent = "Czytaj więcej";
+    }
+  }
+  for (let i = 0; i < readMoreLessBtns.length; i++) {
+    readMoreLessBtns[i].addEventListener("click", showHideText);
+  }
 });
